@@ -32,13 +32,29 @@
         <p class="fine-print">This is a ready queue, not an appointment time. Your place is kept private.</p>
       </section>
 
-      <section class="projector card" id="projector-view" hidden aria-labelledby="projector-title">
-        <p class="eyebrow">CMPS-1000 A+ Software</p>
-        <h1 id="projector-title">Ready for your milestone?</h1>
-        <p class="lead" id="projector-message">Scan the code when you are ready.</p>
-        <div class="qr-wrap"><img id="qr-code" src="ready-queue-qr.svg?v=20261023" width="360" height="360" alt="QR code for the milestone ready queue"></div>
-        <p class="projector-instruction">Scan this code, enter your name and workstation, then continue working quietly until I come to you.</p>
-      </section>
+      
+<section class="projector" id="projector-view" hidden aria-labelledby="projector-title">
+  <div class="projector-header">
+    <p class="eyebrow">CMPS-1000 A+ Software</p>
+    <h1 id="projector-title">Ready for your milestone?</h1>
+    <p class="lead" id="projector-message">Scan the code when you are ready.</p>
+  </div>
+
+  <div class="projector-content">
+    <div class="qr-wrap">
+      <img id="qr-code"
+           src="ready-queue-qr.svg?v=20261023"
+           alt="QR code for the milestone ready queue">
+    </div>
+
+    <div class="projector-instructions">
+      <h2>Join the Queue</h2>
+      <p>1. Scan the QR code</p>
+      <p>2. Enter your name and workstation</p>
+      <p>3. Continue working until your instructor arrives</p>
+    </div>
+  </div>
+</section>
     </main>
 
     <script src="config.js?v=20261023"></script>
