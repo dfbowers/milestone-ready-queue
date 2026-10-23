@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Milestone Ready Queue — Instructor</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page-shell instructor-shell">
+      <section class="card" aria-labelledby="dashboard-title">
+        <p class="eyebrow">Instructor view</p>
+        <h1 id="dashboard-title">Milestone Ready Queue</h1>
+        <p class="lead" id="dashboard-milestone"></p>
+
+        <form id="admin-form" class="admin-form">
+          <label for="admin-key">Instructor passcode</label>
+          <div class="inline-form">
+            <input id="admin-key" type="password" autocomplete="current-password" required />
+            <button type="submit">Open queue</button>
+          </div>
+          <p class="form-status" id="admin-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <section id="queue-section" hidden aria-live="polite">
+          <div class="queue-toolbar">
+            <p id="queue-count"></p>
+            <button class="secondary" id="refresh-button" type="button">Refresh</button>
+          </div>
+          <div id="queue-list" class="queue-list"></div>
+        </section>
+      </section>
+    </main>
+    <script src="config.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>
+
