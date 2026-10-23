@@ -1,8 +1,9 @@
 (() => {
   const params = new URLSearchParams(window.location.search);
-  const milestone = (params.get("milestone") || "Current Milestone").trim().slice(0, 80);
-  const projectorMode = params.get("projector") === "1";
   const apiBaseUrl = window.MILESTONE_QUEUE_CONFIG?.apiBaseUrl?.replace(/\/$/, "") || "";
+  const defaultMilestone = window.MILESTONE_QUEUE_CONFIG?.defaultMilestone || "Current Milestone";
+  const milestone = (params.get("milestone") || defaultMilestone).trim().slice(0, 80);
+  const projectorMode = params.get("projector") === "1";
 
   const studentView = document.querySelector("#student-view");
   const projectorView = document.querySelector("#projector-view");
@@ -16,13 +17,6 @@
   if (projectorMode) {
     studentView.hidden = true;
     projectorView.hidden = false;
-    const studentUrl = new URL(window.location.href);
-    studentUrl.searchParams.delete("projector");
-    QRCode.toCanvas(document.querySelector("#qr-code"), studentUrl.toString(), {
-      width: 360,
-      margin: 2,
-      color: { dark: "#12355b", light: "#ffffff" },
-    });
     return;
   }
 
@@ -60,4 +54,3 @@
     }
   });
 })();
-
