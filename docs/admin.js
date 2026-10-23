@@ -1,6 +1,7 @@
 (() => {
   const params = new URLSearchParams(window.location.search);
-  const milestone = (params.get("milestone") || "Current Milestone").trim().slice(0, 80);
+  const defaultMilestone = window.MILESTONE_QUEUE_CONFIG?.defaultMilestone || "Current Milestone";
+const milestone = (params.get("milestone") || defaultMilestone).trim().slice(0, 80);
   const apiBaseUrl = window.MILESTONE_QUEUE_CONFIG?.apiBaseUrl?.replace(/\/$/, "") || "";
   const form = document.querySelector("#admin-form");
   const passcode = document.querySelector("#admin-key");
