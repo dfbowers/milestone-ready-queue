@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#12355b" />
+    <title>Milestone Ready Queue</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="card" id="student-view" aria-labelledby="page-title">
+        <p class="eyebrow">CMPS-1000 A+ Software</p>
+        <h1 id="page-title">Milestone Ready Queue</h1>
+        <p class="lead" id="milestone-message">Join the ready queue when you are prepared to complete your milestone assessment.</p>
+
+        <div class="notice">
+          <strong>How it works:</strong> Submit once you are ready. Continue working quietly on your lab. Your instructor will come to you when available.
+        </div>
+
+        <form id="ready-form" novalidate>
+          <label for="student-name">Your name</label>
+          <input id="student-name" name="studentName" autocomplete="name" maxlength="80" required />
+
+          <label for="workstation">Workstation</label>
+          <input id="workstation" name="workstation" autocomplete="off" maxlength="40" required placeholder="Example: PC-12" />
+
+          <button type="submit" id="submit-button">I’m Ready for My Milestone</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="fine-print">This is a ready queue, not an appointment time. Your place is kept private.</p>
+      </section>
+
+      <section class="projector card" id="projector-view" hidden aria-labelledby="projector-title">
+        <p class="eyebrow">CMPS-1000 A+ Software</p>
+        <h1 id="projector-title">Ready for your milestone?</h1>
+        <p class="lead" id="projector-message">Scan the code when you are ready.</p>
+        <div class="qr-wrap"><canvas id="qr-code" width="360" height="360" aria-label="QR code for the milestone ready queue"></canvas></div>
+        <p class="projector-instruction">Scan this code, enter your name and workstation, then continue working quietly until I come to you.</p>
+      </section>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
+
