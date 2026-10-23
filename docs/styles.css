@@ -23,3 +23,90 @@ button.secondary { background: #e8f1f8; color: var(--blue); } button.secondary:h
 .queue-list { display: grid; gap: .75rem; }.queue-item { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem; border: 1px solid var(--line); border-radius: 10px; }.queue-item h2 { margin: 0; font-size: 1.15rem; }.queue-item p { margin: .35rem 0 0; color: #486581; }.queue-actions { display: flex; flex-wrap: wrap; gap: .5rem; }.queue-actions button { margin: 0; padding: .6rem .8rem; font-size: .9rem; }
 @media (max-width: 640px) { .page-shell { padding: 1rem 0; }.inline-form, .queue-item { align-items: stretch; flex-direction: column; }.inline-form button { width: 100%; }.queue-actions button { flex: 1; } }
 
+
+/* Full-screen classroom projector display */
+body:has(#projector-view:not([hidden])) {
+  margin: 0;
+}
+
+body:has(#projector-view:not([hidden])) .page-shell {
+  width: 100%;
+  max-width: none;
+  min-height: 100vh;
+  padding: 2vh 3vw;
+  box-sizing: border-box;
+}
+
+#projector-view:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: none;
+  height: 94vh;
+  box-sizing: border-box;
+  padding: 2vh 3vw;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.projector-header {
+  text-align: center;
+}
+
+.projector-header h1 {
+  font-size: clamp(2rem, 4vw, 4rem);
+  margin: 0.2em 0;
+}
+
+.projector-header .lead {
+  margin: 0.3em 0 1em;
+}
+
+.projector-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 5vw;
+  flex: 1;
+  min-height: 0;
+}
+
+#projector-view .qr-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+#projector-view .qr-wrap img {
+  display: block;
+  width: min(100%, 55vh);
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.projector-instructions h2 {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+}
+
+.projector-instructions p {
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  line-height: 1.4;
+}
+
+@media (max-width: 700px) {
+  .projector-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  #projector-view:not([hidden]) {
+    height: auto;
+    min-height: 94vh;
+  }
+
+  #projector-view .qr-wrap img {
+    width: min(65vw, 35vh);
+  }
+}
