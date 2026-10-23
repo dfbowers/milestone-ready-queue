@@ -21,5 +21,7 @@ From this `worker` folder:
 - Projector QR screen: add `&projector=1`
 - Instructor queue: `/admin.html?milestone=MS2`
 
+The projector refreshes a public, read-only waiting-count endpoint every 10 seconds. That endpoint returns only the number of entries whose status is `waiting`; it does not return student details or instructor credentials.
+
 Use a new milestone label each time (for example, `MS3`). The instructor dashboard only shows entries for that label.
 

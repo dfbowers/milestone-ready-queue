@@ -10,6 +10,7 @@
   const form = document.querySelector("#ready-form");
   const status = document.querySelector("#form-status");
   const submitButton = document.querySelector("#submit-button");
+  const projectorWaitingCount = document.querySelector("#projector-waiting-count");
 
   document.querySelector("#milestone-message").textContent = `Join the ${milestone} ready queue when you are prepared to complete your assessment.`;
   document.querySelector("#projector-message").textContent = `Scan the code when you are ready for ${milestone}.`;
@@ -17,6 +18,36 @@
   if (projectorMode) {
     studentView.hidden = true;
     projectorView.hidden = false;
+
+    let isRefreshingCount = false;
+    async function refreshWaitingCount() {
+      if (isRefreshingCount) return;
+      if (!apiBaseUrl) {
+        projectorWaitingCount.textContent = "Waiting count unavailable.";
+        return;
+      }
+
+      isRefreshingCount = true;
+      try {
+        const response = await fetch(
+          `${apiBaseUrl}/api/waiting-count?milestone=${encodeURIComponent(milestone)}`,
+          { cache: "no-store" },
+        );
+        if (!response.ok) throw new Error("Unable to load the waiting count.");
+        const { waitingCount } = await response.json();
+        if (!Number.isSafeInteger(waitingCount) || waitingCount < 0) {
+          throw new Error("Invalid waiting count.");
+        }
+        projectorWaitingCount.textContent = `${waitingCount} student${waitingCount === 1 ? " is" : "s are"} waiting.`;
+      } catch {
+        projectorWaitingCount.textContent = "Waiting count unavailable.";
+      } finally {
+        isRefreshingCount = false;
+      }
+    }
+
+    refreshWaitingCount();
+    window.setInterval(refreshWaitingCount, 10_000);
     return;
   }
 

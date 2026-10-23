@@ -9,8 +9,11 @@ function corsHeaders(env) {
   };
 }
 
-function json(data, status, env) {
-  return new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json; charset=utf-8", ...corsHeaders(env) } });
+function json(data, status, env, extraHeaders = {}) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { "Content-Type": "application/json; charset=utf-8", ...corsHeaders(env), ...extraHeaders },
+  });
 }
 
 function validText(value, maxLength) {
@@ -38,6 +41,20 @@ export default {
         .bind(studentName.trim(), workstation.trim(), milestone.trim())
         .run();
       return json({ ok: true }, 201, env);
+    }
+
+    if (request.method === "GET" && url.pathname === "/api/waiting-count") {
+      const milestone = url.searchParams.get("milestone");
+      if (!validText(milestone, 80)) return json({ error: "A valid milestone is required." }, 400, env);
+      const entry = await env.DB.prepare(
+        "SELECT COUNT(*) AS waitingCount FROM queue_entries WHERE milestone = ? AND status = 'waiting'"
+      ).bind(milestone.trim()).first();
+      return json(
+        { waitingCount: Number(entry?.waitingCount || 0) },
+        200,
+        env,
+        { "Cache-Control": "no-store" },
+      );
     }
 
     if (request.method === "GET" && url.pathname === "/api/queue") {
