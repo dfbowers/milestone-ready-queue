@@ -118,3 +118,5 @@ body:has(#projector-view:not([hidden])) .page-shell {
     width: min(65vw, 35vh);
   }
 }
+
+.next-students { margin: .3em 0; color: var(--blue); font-size: clamp(1.3rem, 2.7vw, 2rem); font-weight: 700; overflow-wrap: anywhere; }

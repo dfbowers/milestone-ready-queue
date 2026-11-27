@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#12355b" />
     <title>Milestone Ready Queue</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=next-students-1" />
   </head>
   <body>
     <main class="page-shell">
@@ -29,7 +29,7 @@
           <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
 
-        <p class="fine-print">This is a ready queue, not an appointment time. Your place is kept private.</p>
+        <p class="fine-print">This is a ready queue, not an appointment time. The next two waiting students’ names appear on the classroom projector and are publicly accessible online.</p>
       </section>
 
       
@@ -38,6 +38,7 @@
     <p class="eyebrow">CMPS-1000 A+ Software</p>
     <h1 id="projector-title">Ready for your milestone?</h1>
     <p class="lead" id="projector-message">Scan the code when you are ready.</p>
+    <p class="next-students" id="next-students" role="status" aria-live="polite">Checking who is up next…</p>
     <p class="projector-waiting-count" id="projector-waiting-count" role="status" aria-live="polite">Checking how many students are waiting…</p>
   </div>
 
@@ -59,7 +60,7 @@
     </main>
 
     <script src="config.js?v=20261023"></script>
-    <script src="app.js?v=waiting-count-1"></script>
+    <script src="app.js?v=next-students-1"></script>
   </body>
 </html>
 

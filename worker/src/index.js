@@ -57,6 +57,15 @@ export default {
       );
     }
 
+    if (request.method === "GET" && url.pathname === "/api/next-students") {
+      const milestone = url.searchParams.get("milestone");
+      if (!validText(milestone, 80)) return json({ error: "A valid milestone is required." }, 400, env);
+      const { results } = await env.DB.prepare(
+        "SELECT student_name FROM queue_entries WHERE milestone = ? AND status = 'waiting' ORDER BY submitted_at ASC, id ASC LIMIT 2"
+      ).bind(milestone.trim()).all();
+      return json({ names: results.map((entry) => entry.student_name) }, 200, env, { "Cache-Control": "no-store" });
+    }
+
     if (request.method === "GET" && url.pathname === "/api/queue") {
       if (!isAdmin(request, env)) return json({ error: "Instructor access is required." }, 401, env);
       const milestone = url.searchParams.get("milestone");

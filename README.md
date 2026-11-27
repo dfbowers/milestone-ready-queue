@@ -2,7 +2,7 @@
 
 A small, reusable readiness queue for CMPS-1000 A+ Software milestones.
 
-Students scan the projector QR code, enter their name and workstation, and receive a confirmation that they are in the ready queue. The instructor opens the private dashboard to call or complete students. The public site never displays student names, queue order, or assessment results.
+Students scan the projector QR code, enter their name and workstation, and receive a confirmation that they are in the ready queue. The instructor opens the private dashboard to call or complete students. The projector and a public endpoint show the next two waiting students’ names in queue order; assessment results are not displayed.
 
 ## Structure
 

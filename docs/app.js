@@ -11,6 +11,7 @@
   const status = document.querySelector("#form-status");
   const submitButton = document.querySelector("#submit-button");
   const projectorWaitingCount = document.querySelector("#projector-waiting-count");
+  const nextStudents = document.querySelector("#next-students");
 
   document.querySelector("#milestone-message").textContent = `Join the ${milestone} ready queue when you are prepared to complete your assessment.`;
   document.querySelector("#projector-message").textContent = `Scan the code when you are ready for ${milestone}.`;
@@ -46,8 +47,25 @@
       }
     }
 
+    async function refreshNextStudents() {
+      if (!apiBaseUrl) {
+        nextStudents.textContent = "Next students unavailable.";
+        return;
+      }
+      try {
+        const response = await fetch(`${apiBaseUrl}/api/next-students?milestone=${encodeURIComponent(milestone)}`, { cache: "no-store" });
+        if (!response.ok) throw new Error("Unable to load next students.");
+        const { names } = await response.json();
+        if (!Array.isArray(names) || names.length > 2 || names.some((name) => typeof name !== "string")) throw new Error("Invalid response.");
+        nextStudents.textContent = names.length ? `Up next: ${names.join(" · ")}` : "No students waiting.";
+      } catch {
+        nextStudents.textContent = "Next students unavailable.";
+      }
+    }
+
     refreshWaitingCount();
-    window.setInterval(refreshWaitingCount, 10_000);
+    refreshNextStudents();
+    window.setInterval(() => { refreshWaitingCount(); refreshNextStudents(); }, 10_000);
     return;
   }
 
